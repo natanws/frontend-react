@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import api from "../services/api";
 
 interface PostsProps {
@@ -14,26 +20,32 @@ interface DataProps {
 
 interface PostsData {
   posts: DataProps[];
-  searchPosts: () => void;
+  nextPage: () => void;
+  previousPage: () => void;
 }
 
 const PostsContext = createContext<PostsData>({} as PostsData);
 
 const PostsProvider = ({ children }: PostsProps) => {
   const [posts, setPosts] = useState<DataProps[]>([] as DataProps[]);
-  const [page, setPage] = useState<String>("v1/posts?_format=json");
-  const [totalPages, setTotalPage] = useState<Number>(1);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPage] = useState<number>(1);
 
-  const searchPosts = () => {
-    api.get(`${page}`).then((response) => {
+  const nextPage = () =>
+    page !== totalPages ? setPage(page + 1) : console.log("last page");
+
+  const previousPage = () =>
+    page !== 1 ? setPage(page - 1) : console.log("first page");
+
+  useEffect(() => {
+    api.get(`v1/posts?_format=json&page=${page}`).then((response) => {
       setPosts(response.data.data);
-      setTotalPage(response.data.meta.pagination.page.pages);
-      console.log(response.data.data);
+      setTotalPage(response.data.meta.pagination.pages);
     });
-  };
+  }, [page]);
 
   return (
-    <PostsContext.Provider value={{ posts, searchPosts }}>
+    <PostsContext.Provider value={{ posts, nextPage, previousPage }}>
       {children}
     </PostsContext.Provider>
   );

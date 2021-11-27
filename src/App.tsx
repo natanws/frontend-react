@@ -3,11 +3,12 @@ import "./App.scss";
 import { usePosts } from "./providers/postsProvider";
 
 const App = () => {
-  const { searchPosts, posts } = usePosts();
+  const { posts, nextPage, previousPage } = usePosts();
 
   return (
     <div className="App">
-      <button onClick={searchPosts}>Request test</button>
+      <button onClick={previousPage}>Previous page</button>
+      <button onClick={nextPage}>Next page</button>
       <div>
         {posts.map((post) => (
           <div key={post.id}>
