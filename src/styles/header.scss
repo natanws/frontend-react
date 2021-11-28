@@ -1,0 +1,11 @@
+@import "variables/colors";
+.HeaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $black;
+    width: 100%;
+    svg {
+        margin: 20px 0;
+    }
+}

@@ -1,0 +1,16 @@
+@import "variables/colors";
+@import "variables/fonts";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+body {
+    background-color: $white-3;
+    font-family: $family;
+    overflow-x: hidden;
+    padding-bottom: 35px;
+    color: $grey-2;
+    .App {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100vw;
+    }
+}
