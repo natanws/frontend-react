@@ -6,6 +6,7 @@ body {
     font-family: $family;
     overflow-x: hidden;
     padding-bottom: 35px;
+    color: $grey-2;
     .App {
         display: flex;
         flex-direction: column;
