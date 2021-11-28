@@ -22,7 +22,10 @@ interface PostsData {
   posts: DataProps[];
   nextPage: () => void;
   previousPage: () => void;
+  jumpToPage: (value: number) => void;
   error: boolean;
+  totalPages: number;
+  page: number;
 }
 
 const PostsContext = createContext<PostsData>({} as PostsData);
@@ -49,6 +52,10 @@ const PostsProvider = ({ children }: PostsProps) => {
     }
   };
 
+  const jumpToPage = (pageNumber: number) => {
+    setPage(pageNumber);
+  };
+
   useEffect(() => {
     api
       .get(`v1/posts?_format=json&token=${token}&page=${page}`)
@@ -60,7 +67,17 @@ const PostsProvider = ({ children }: PostsProps) => {
   }, [page, token]);
 
   return (
-    <PostsContext.Provider value={{ posts, nextPage, previousPage, error }}>
+    <PostsContext.Provider
+      value={{
+        posts,
+        nextPage,
+        previousPage,
+        error,
+        totalPages,
+        jumpToPage,
+        page,
+      }}
+    >
       {children}
     </PostsContext.Provider>
   );
