@@ -39,13 +39,15 @@ const PostsProvider = ({ children }: PostsProps) => {
 
   const nextPage = () => {
     if (page !== totalPages) {
-      setPosts([]);
       setPage(page + 1);
     }
   };
 
-  const previousPage = () =>
-    page !== 1 ? setPage(page - 1) : console.log("first page");
+  const previousPage = () => {
+    if (page === 1) {
+      setPage(page - 1);
+    }
+  };
 
   useEffect(() => {
     api
@@ -54,7 +56,7 @@ const PostsProvider = ({ children }: PostsProps) => {
         setPosts(response.data.data);
         setTotalPage(response.data.meta.pagination.pages);
       })
-      .catch((err) => setError(true));
+      .catch((_) => setError(true));
   }, [page, token]);
 
   return (
