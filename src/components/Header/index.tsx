@@ -1,10 +1,11 @@
 import React from "react";
 import "../../styles/header.scss";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 const Header = () => {
   return (
-    <div>
-      <img src="/" alt="Logo da Moovin" />
+    <div className="HeaderContainer">
+      <Logo />
     </div>
   );
 };
