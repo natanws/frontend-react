@@ -1,0 +1,28 @@
+@import "variables/colors";
+.PaginationContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 20px 0;
+    .PageCount {
+        padding-top: 5px;
+        font-weight: 400;
+        font-size: 0.8rem;
+    }
+    .Button {
+        margin: 0 10px;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        font-weight: 800;
+    }
+    .CurrentPage {
+        border: 2px solid $grey-1;
+        border-radius: 5px;
+        cursor: default;
+    }
+    .Disabled {
+        cursor: default;
+        color: lighten($grey-1, 20%);
+    }
+}
