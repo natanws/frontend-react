@@ -47,7 +47,7 @@ const PostsProvider = ({ children }: PostsProps) => {
   };
 
   const previousPage = () => {
-    if (page === 1) {
+    if (page !== 1) {
       setPage(page - 1);
     }
   };
